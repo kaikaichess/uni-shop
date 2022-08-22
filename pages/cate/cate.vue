@@ -1,5 +1,8 @@
 <template>
 	<view>
+		<!-- 搜索区域 -->
+		<my-search></my-search>
+		<!-- 分类列表区域 -->
 		<view class="scroll-view-container">
 			<!-- 左侧滑动区 -->
 			<scroll-view class="left-scroll" scroll-y="true" :style="{height: windowHeight + 'px'}">
