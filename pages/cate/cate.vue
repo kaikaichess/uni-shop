@@ -1,7 +1,8 @@
 <template>
 	<view>
 		<!-- 搜索区域 -->
-		<my-search></my-search>
+		<!-- 自定义组件中并没有封装点击事件，所以要通过点击自定义插件内的标签触发事件冒泡来触发事件 -->
+		<my-search @myclick="gotoSearch"></my-search>
 		<!-- 分类列表区域 -->
 		<view class="scroll-view-container">
 			<!-- 左侧滑动区 -->
@@ -70,11 +71,18 @@
 				uni.navigateTo({
 					url: `/subpkg/goods_list/goods_list?cid=${item3.cat_id}`
 				})
-			}
+			},
+			// 搜索跳转事件
+			gotoSearch() {
+				uni.navigateTo({
+					url: '/subpkg/search/search',
+				})
+			},
 		},
 		onLoad() {
 			const sysInfo = uni.getSystemInfoSync()
-			this.windowHeight = sysInfo.windowHeight
+			// 拿到窗口可用高度后还要减去搜索框的高度，否则会使分类列表内容显示不全
+			this.windowHeight = sysInfo.windowHeight - 50
 			this.getCateList()
 		}
 	}
