@@ -32,6 +32,7 @@
 </template>
 
 <script>
+	import badgeMix from '../../mixins/tabbar-badge.js'
 	export default {
 		data() {
 			return {
@@ -84,7 +85,9 @@
 			// 拿到窗口可用高度后还要减去搜索框的高度，否则会使分类列表内容显示不全
 			this.windowHeight = sysInfo.windowHeight - 50
 			this.getCateList()
-		}
+		},
+		// 引入购物车徽标
+		mixins: [badgeMix]
 	}
 </script>
 

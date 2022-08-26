@@ -42,6 +42,7 @@
 </template>
 
 <script>
+	import badgeMix from '../../mixins/tabbar-badge.js'
 	export default {
 		data() {
 			return {
@@ -107,7 +108,9 @@
 			this.getNavList()
 			// 调用获取商品展示楼层数据的方法
 			this.getFloorList()
-		}
+		},
+		// 引入购物车徽标
+		mixins: [badgeMix]
 	}
 </script>
 
