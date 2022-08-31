@@ -17,6 +17,11 @@ export default {
 			})
 		}
 	},
+	watch: {
+		total() {
+			this.setBadge()
+		}
+	},
 	onShow() {
 		// 调用设置购物车徽标的方法
 		this.setBadge()

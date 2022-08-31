@@ -3,7 +3,13 @@ export default {
 	namespaced: true,
 	state: {
 		// 收货地址
-		address: JSON.parse(uni.getStorageSync('address') ||'{}')
+		address: JSON.parse(uni.getStorageSync('address') ||'{}'),
+		// 登录后获取的token字符串
+		token: uni.getStorageSync('token') ||'',
+		// 用户信息
+		userinfo: JSON.parse(uni.getStorageSync('userinfo') ||'{}'),
+		// 重定向的object对象（openType，from）
+		redirectInfo: null
 	},
 	
 	actions: {},
@@ -17,6 +23,28 @@ export default {
 		// 持久化存储收货地址
 		SAVEADDRESS(state) {
 			uni.setStorageSync('address', JSON.stringify(state.address))
+		},
+		// 更新用户基本信息
+		UPDATEUSERINFO(state, userinfo) {
+			state.userinfo = userinfo
+			this.commit('user/SAVEUSERINFO')
+		},
+		// 持久化存储用户信息
+		SAVEUSERINFO(state) {
+			uni.setStorageSync('userinfo', JSON.stringify(state.userinfo))
+		},
+		// 更新token字符串
+		UPDATETOKEN(state, token) {
+			state.token = token
+			this.commit('user/SAVETOKEN')
+		},
+		// 持久化存储token
+		SAVETOKEN(state) {
+			uni.setStorageSync('token', state.token)
+		},
+		// 更新重定向信息
+		UPDATEREDIRECTINFO(state, info) {
+			state.redirectInfo = info
 		}
 	},
 	

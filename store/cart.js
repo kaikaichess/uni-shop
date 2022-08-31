@@ -47,14 +47,25 @@ export default {
 		REMOVEGOODSBYID(state, goods_id) {
 			state.cart = state.cart.filter(item => item.goods_id !== goods_id)
 			this.commit('cart/SAVETOSTORAGE')
-		}
+		},
+		// 点击全选更新商品勾选状态
+		UPDATEALLGOODSSTATE(state, newState) {
+			state.cart.forEach(item => item.goods_state = newState)
+			this.commit('cart/SAVETOSTORAGE')
+		},
 	},
 	getters: {
 		// 计算购物车中商品的总数
 		total(state) {
-			let num = 0
-			state.cart.forEach(item => num += item.goods_count)
-			return num
+			return state.cart.reduce((total, item) => total += item.goods_count, 0)
+		},
+		// 勾选商品的总数
+		checkedCount(state) {
+			return state.cart.filter(item => item.goods_state).reduce((total, item) => total += item.goods_count, 0)
+		},
+		// 已勾选商品的总价
+		checkedGoodsAmount(state) {
+			return state.cart.filter(item => item.goods_state).reduce((total, item) => total += item.goods_count * item.goods_price, 0).toFixed(2)
 		}
 	}
 	
